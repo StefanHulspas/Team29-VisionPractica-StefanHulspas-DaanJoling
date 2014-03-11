@@ -1,0 +1,15 @@
+Meetrapport week3-4
+===================
+
+Het doel: "Het doel van het experiment is een eigen foto klasse te maken."
+
+Dit kan geen doel zijn van een experiment. Dit is een taak die jullie gaan doen, en daarna moeten jullie aangeven wat je met die eigen foto klasse kan doen.
+
+De hypothese is erg zwak. Wat moet hij dan doen? Wat verwacht je van het gedrag?
+
+Omdat het doel en de hypothese niet goed zijn kan ik ook niets over de rest van het rapport zeggen.
+
+
+Code
+====
+Ik zie erg weinig code. Welke repos gebruiken jullie? Is dat deze? Ik heb namelijk ook nog een StefanHulspas/Vision waar de goede tag in zit, maar die heeft nog geen naam met een team nummer.
