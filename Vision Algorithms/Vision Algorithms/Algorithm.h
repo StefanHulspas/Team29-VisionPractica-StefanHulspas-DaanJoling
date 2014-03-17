@@ -1,18 +1,17 @@
 #pragma once
 
 #include "stdafx.h"
-#include "Image.h"
-#include <iostream>
 
 class Algorithm
 {
 protected:
-	const int BLUE = 0;
-	const int GREEN = 1;
-	const int RED = 2;
-	~Algorithm();
+	char * name;
 public:
-	Algorithm();
-	Algorithm(const Algorithm& a);
-	void virtual doAlgorithm(Image i);
+	const static unsigned char BLUE = 0;
+	const static unsigned char GREEN = 1;
+	const static unsigned char RED = 2;
+	Algorithm(char * name);
+	~Algorithm();
+	virtual void doAlgorithm(unsigned char * rawData, int bpp, int height, int width, int pitch) = 0;
+	char * getName();
 };

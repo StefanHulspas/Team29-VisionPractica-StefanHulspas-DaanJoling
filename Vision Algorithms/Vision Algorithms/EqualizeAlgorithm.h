@@ -1,12 +1,12 @@
 #pragma once
-#include "stdafx.h"
 #include "Algorithm.h"
 
-class GrayAlgorithm : public Algorithm
+class EqualizeAlgorithm : public Algorithm
 {
 private:
+	const int size = 256;
 public:
-	GrayAlgorithm();
-	~GrayAlgorithm();
+	EqualizeAlgorithm();
+	~EqualizeAlgorithm();
 	virtual void doAlgorithm(unsigned char * rawData, int bpp, int height, int width, int pitch);
 };

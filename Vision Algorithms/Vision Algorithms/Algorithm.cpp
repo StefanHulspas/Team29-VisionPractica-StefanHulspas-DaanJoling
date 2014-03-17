@@ -2,15 +2,15 @@
 #include "Algorithm.h"
 
 
-Algorithm::Algorithm()
+Algorithm::Algorithm(char * name)
 {
+	this->name = name;
 }
-
-Algorithm::Algorithm(const Algorithm& a)
-{
-}
-
 
 Algorithm::~Algorithm()
 {
+}
+
+char * Algorithm::getName() {
+	return name;
 }
