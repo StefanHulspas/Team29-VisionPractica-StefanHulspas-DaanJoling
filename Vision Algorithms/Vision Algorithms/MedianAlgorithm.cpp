@@ -17,8 +17,8 @@ MedianAlgorithm::~MedianAlgorithm()
 }
 
 void MedianAlgorithm::doAlgorithm(unsigned char * rawData, int bpp, int height, int width, int pitch) {
-	if (convolutionSize > width) {
-		std::cout << "Not a valid format for this Algorithm";
+	if (convolutionSize > width || convolutionSize > height) {
+		std::cout << "Not a valid format for this Algorithm.\nFilter is bigger then the image.\nNothing is done.\n";
 		return;
 	}
 

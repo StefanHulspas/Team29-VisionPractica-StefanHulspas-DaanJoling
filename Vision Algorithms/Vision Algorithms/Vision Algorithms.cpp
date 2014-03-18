@@ -11,14 +11,16 @@
 #include "MeanAlgorithm.h"
 #include "MedianAlgorithm.h"
 #include "SingleColorAlgorithm.h"
+#include "K_MeansClusterAlgorithm.h"
 #include <iostream> 
 #include <string>
 
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	Image original("meepo.jpg");
+	Image original("testK.png");
 	if (original.isCreated()) {
+		/*
 		Image gray(original);
 		gray.applyAlgorithm(new GrayAlgorithm());
 		gray.applyAlgorithm(new HistogramAlgorithm(gray.getFirstName(), 256), false);
@@ -28,13 +30,16 @@ int _tmain(int argc, _TCHAR* argv[])
 		salt_pepper.applyAlgorithm(new SaltAndPepperAlgorithm(50));
 		Image salt_copy(salt_pepper);
 		salt_pepper.applyAlgorithm(new MeanAlgorithm());
-		salt_copy.applyAlgorithm(new MedianAlgorithm(7));
-		Image RED(salt_copy);
-		Image BLUE(salt_copy);
-		Image GREEN(salt_copy);
+		salt_copy.applyAlgorithm(new MedianAlgorithm(5));
+		Image RED(original);
+		Image BLUE(original);
+		Image GREEN(original);
 		BLUE.applyAlgorithm(new SingleColorAlgorithm(0));
 		GREEN.applyAlgorithm(new SingleColorAlgorithm(1));
-		RED.applyAlgorithm(new SingleColorAlgorithm(2));
+		RED.applyAlgorithm(new SingleColorAlgorithm(2)); */
+		Image cluster(original); 
+		cluster.applyAlgorithm(new MeanAlgorithm());
+		cluster.applyAlgorithm(new K_MeansClusterAlgorithm(3));
 	}
 
 	std::cout << "Press ENTER to continue... ";

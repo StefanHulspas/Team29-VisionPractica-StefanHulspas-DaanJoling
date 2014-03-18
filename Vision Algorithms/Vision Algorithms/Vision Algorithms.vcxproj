@@ -89,6 +89,7 @@
     <ClInclude Include="Histogram.h" />
     <ClInclude Include="HistogramAlgorithm.h" />
     <ClInclude Include="Image.h" />
+    <ClInclude Include="K_MeansClusterAlgorithm.h" />
     <ClInclude Include="MeanAlgorithm.h" />
     <ClInclude Include="MedianAlgorithm.h" />
     <ClInclude Include="SaltAndPepperAlgorithm.h" />
@@ -103,6 +104,7 @@
     <ClCompile Include="Histogram.cpp" />
     <ClCompile Include="HistogramAlgorithm.cpp" />
     <ClCompile Include="Image.cpp" />
+    <ClCompile Include="K_MeansClusterAlgorithm.cpp" />
     <ClCompile Include="MeanAlgorithm.cpp" />
     <ClCompile Include="MedianAlgorithm.cpp" />
     <ClCompile Include="SaltAndPepperAlgorithm.cpp" />
