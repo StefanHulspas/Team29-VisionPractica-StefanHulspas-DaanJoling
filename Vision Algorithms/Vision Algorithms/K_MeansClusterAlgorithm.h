@@ -1,10 +1,10 @@
 #pragma once
 #include "Algorithm.h"
 #include <iostream>
+#include <vector>
 #include <string>
 #include <time.h>
 #include <random>
-#include <vector>
 
 class K_MeansClusterAlgorithm : public Algorithm
 {

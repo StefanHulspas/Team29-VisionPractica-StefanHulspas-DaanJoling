@@ -18,7 +18,7 @@
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	Image original("testK.png");
+	Image original("meepogroep.png");
 	if (original.isCreated()) {
 		/*
 		Image gray(original);
@@ -38,8 +38,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		GREEN.applyAlgorithm(new SingleColorAlgorithm(1));
 		RED.applyAlgorithm(new SingleColorAlgorithm(2)); */
 		Image cluster(original); 
-		cluster.applyAlgorithm(new MeanAlgorithm());
-		cluster.applyAlgorithm(new K_MeansClusterAlgorithm(3));
+		cluster.applyAlgorithm(new K_MeansClusterAlgorithm(20));
 	}
 
 	std::cout << "Press ENTER to continue... ";

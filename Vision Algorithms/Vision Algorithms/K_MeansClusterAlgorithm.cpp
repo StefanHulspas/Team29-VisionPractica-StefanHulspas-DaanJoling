@@ -34,7 +34,7 @@ void K_MeansClusterAlgorithm::doAlgorithm(unsigned char * rawData, int bpp, int 
 	int * greenClusterTotal = new int [k];
 	int * blueClusterTotal = new int [k];
 	int * clusterCount = new int[k];
-	unsigned int x, y, closest, cluster, totalColor, closestColor, distClosest, distCluster;
+	unsigned int x, y, closest, cluster, distClosest, distCluster;
 	for (i = 0; i < 25; i++) {
 		std::cout << "Iteration " << i + 1 << "\n";
 		for (cluster = 0; cluster < k; cluster++) {
@@ -47,17 +47,16 @@ void K_MeansClusterAlgorithm::doAlgorithm(unsigned char * rawData, int bpp, int 
 			for (x = 0; x < pitch; x += bpp) {
 				int pixel = y * pitch + x;
 				closest = 0;
-				totalColor = rawData[pixel + RED] + rawData[pixel + GREEN] + rawData[pixel + BLUE];
-				closestColor = redClusters[closest] + greenClusters[closest] + blueClusters[closest];
+				distClosest = (rawData[pixel + RED] - redClusters[closest]) * (rawData[pixel + RED] - redClusters[closest])
+							+ (rawData[pixel + GREEN] - greenClusters[closest]) * (rawData[pixel + GREEN] - greenClusters[closest])
+							+ (rawData[pixel + BLUE] - blueClusters[closest]) * (rawData[pixel + BLUE] - blueClusters[closest]);
 				for (cluster = 0; cluster < k; cluster++) {
-					int clusterColor = redClusters[cluster] + greenClusters[cluster] + blueClusters[cluster];
-					distClosest = totalColor - closestColor;
-					distClosest *= distClosest;
-					distCluster = totalColor - clusterColor;
-					distCluster *= distCluster;
-					if (distClosest * distClosest > distCluster * distCluster) {
+					distCluster = (rawData[pixel + RED] - redClusters[cluster]) * (rawData[pixel + RED] - redClusters[cluster])
+								+ (rawData[pixel + GREEN] - greenClusters[cluster]) * (rawData[pixel + GREEN] - greenClusters[cluster])
+								+ (rawData[pixel + BLUE] - blueClusters[cluster]) * (rawData[pixel + BLUE] - blueClusters[cluster]);
+					if (distClosest > distCluster) {
 						closest = cluster;
-						closestColor = clusterColor;
+						distClosest = distCluster;
 					}
 				}
 				redClusterTotal[closest] += rawData[pixel + RED];
@@ -89,18 +88,18 @@ void K_MeansClusterAlgorithm::doAlgorithm(unsigned char * rawData, int bpp, int 
 	std::cout << "Starting picture change\n";
 	for (y = 0; y < height; y++) {
 		for (x = 0; x < pitch; x += bpp) {
+			int pixel = y * pitch + x;
 			closest = 0;
-			totalColor = rawData[y * pitch + x + RED] + rawData[y * pitch + x + GREEN] + rawData[y * pitch + x + BLUE];
-			closestColor = redClusters[closest] + greenClusters[closest] + blueClusters[closest];
+			distClosest = (rawData[pixel + RED] - redClusters[closest]) * (rawData[pixel + RED] - redClusters[closest])
+						+ (rawData[pixel + GREEN] - greenClusters[closest]) * (rawData[pixel + GREEN] - greenClusters[closest])
+						+ (rawData[pixel + BLUE] - blueClusters[closest]) * (rawData[pixel + BLUE] - blueClusters[closest]);
 			for (cluster = 0; cluster < k; cluster++) {
-				int clusterColor = redClusters[cluster] + greenClusters[cluster] + blueClusters[cluster];
-				distClosest = totalColor - closestColor;
-				distClosest *= distClosest;
-				distCluster = totalColor - clusterColor;
-				distCluster *= distCluster;
-				if (distClosest * distClosest > distCluster * distCluster) {
+				distCluster = (rawData[pixel + RED] - redClusters[cluster]) * (rawData[pixel + RED] - redClusters[cluster])
+					+ (rawData[pixel + GREEN] - greenClusters[cluster]) * (rawData[pixel + GREEN] - greenClusters[cluster])
+					+ (rawData[pixel + BLUE] - blueClusters[cluster]) * (rawData[pixel + BLUE] - blueClusters[cluster]);
+				if (distClosest > distCluster) {
 					closest = cluster;
-					closestColor = clusterColor;
+					distClosest = distClosest;
 				}
 			}
 			rawData[y * pitch + x + RED] = redClusters[closest];
