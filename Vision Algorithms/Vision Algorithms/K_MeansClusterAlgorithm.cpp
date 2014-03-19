@@ -2,12 +2,23 @@
 #include "K_MeansClusterAlgorithm.h"
 
 
-K_MeansClusterAlgorithm::K_MeansClusterAlgorithm(unsigned int k) : Algorithm("K_Means_Cluster_"), k(k)
+K_MeansClusterAlgorithm::K_MeansClusterAlgorithm(unsigned int k) : Algorithm("_Means_Cluster_"), k(k)
 {
 	if (k >= 100) {
 		std::cout << "Cluster size k too big, picking standart size 3.";
 		this->k = 3;
 	}
+
+	char * newName = (char*)malloc(sizeof(char*)* 20);
+
+	newName[0] = '0' + (char)(this->k / 10);
+	newName[1] = '0' + (char)(this->k % 10);
+	int i;
+	for (i = 0; i < 17; i++) {
+		newName[i + 2] = name[i];
+	}
+	newName[i] = '\0';
+	name = newName;
 }
 
 

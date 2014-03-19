@@ -12,13 +12,14 @@
 #include "MedianAlgorithm.h"
 #include "SingleColorAlgorithm.h"
 #include "K_MeansClusterAlgorithm.h"
+#include "ThresholdAlgorithm.h"
 #include <iostream> 
 #include <string>
 
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	Image original("meepogroep.png");
+	Image original("huisgrey.png");
 	if (original.isCreated()) {
 		/*
 		Image gray(original);
@@ -36,9 +37,10 @@ int _tmain(int argc, _TCHAR* argv[])
 		Image GREEN(original);
 		BLUE.applyAlgorithm(new SingleColorAlgorithm(0));
 		GREEN.applyAlgorithm(new SingleColorAlgorithm(1));
-		RED.applyAlgorithm(new SingleColorAlgorithm(2)); */
+		RED.applyAlgorithm(new SingleColorAlgorithm(2));*/
 		Image cluster(original); 
-		cluster.applyAlgorithm(new K_MeansClusterAlgorithm(20));
+		cluster.applyAlgorithm(new K_MeansClusterAlgorithm(4)); 
+		original.applyAlgorithm(new ThresholdAlgorithm());
 	}
 
 	std::cout << "Press ENTER to continue... ";
