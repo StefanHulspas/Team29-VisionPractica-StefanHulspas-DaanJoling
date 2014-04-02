@@ -16,6 +16,12 @@ MedianAlgorithm::~MedianAlgorithm()
 {
 }
 
+/* median algorithm
+the medianfilter will walk though the page with a resizeable mask.
+the center pixel in this mask will be replaced with the pivot of the array. the pivot will be the new value of the center pixel.
+the method needs an Image object.
+*/
+
 void MedianAlgorithm::doAlgorithm(Image& img) {
 	unsigned char * rawData = img.getRawData();
 	int bpp = img.getBPP();
@@ -80,7 +86,8 @@ void MedianAlgorithm::doAlgorithm(Image& img) {
 		}
 	}
 }
-
+/*sortArray, will sort the array.
+used to  take the pivot from.*/
 int * MedianAlgorithm::sortArray(const int * convolutie) {
 	int * newConvolutie = new int[convolutionSize * convolutionSize];
 	unsigned int i;
@@ -115,6 +122,8 @@ int MedianAlgorithm::partition(int* input, int p, int r)
 
 	return r;
 }
+
+/*quicksort, will sort a small array fast.*/
 
 void MedianAlgorithm::quicksort(int* input, int p, int r)
 {

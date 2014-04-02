@@ -11,7 +11,9 @@ ThresholdAlgorithm::~ThresholdAlgorithm()
 {
 }
 
-
+/*this algorithm will make area's of sertain colors
+a pixel with the closest color value according to the center pixel will join that area.
+*/
 void ThresholdAlgorithm::doAlgorithm(Image& img) {
 	unsigned char * rawData = img.getRawData();
 	int bpp = img.getBPP();

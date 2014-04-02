@@ -26,6 +26,7 @@ SingleColorAlgorithm::~SingleColorAlgorithm()
 {
 }
 
+/*this algorithm will change the color to red, blue or green.*/
 void SingleColorAlgorithm::doAlgorithm(Image& img) {
 	unsigned char * rawData = img.getRawData();
 	int bpp = img.getBPP();

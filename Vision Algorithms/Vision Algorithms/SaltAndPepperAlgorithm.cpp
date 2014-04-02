@@ -11,7 +11,9 @@ SaltAndPepperAlgorithm::SaltAndPepperAlgorithm(int percentage) : Algorithm("salt
 SaltAndPepperAlgorithm::~SaltAndPepperAlgorithm()
 {
 }
-
+/* the salt and pepper algorithm will randomly spawn white or black pixels.
+the percentage is picked in the gui
+the algorithm will override an pixel and make it black or white*/
 
 void SaltAndPepperAlgorithm::doAlgorithm(Image& img) {
 	srand(time(NULL));

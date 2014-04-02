@@ -9,6 +9,7 @@ private:
 	int size = 256;
 	double * histo;
 public:
+	//constructor, needs a char * name and a size for the historgram
 	HistogramAlgorithm(char * name, int size);
 	~HistogramAlgorithm();
 	virtual void doAlgorithm(Image& i);

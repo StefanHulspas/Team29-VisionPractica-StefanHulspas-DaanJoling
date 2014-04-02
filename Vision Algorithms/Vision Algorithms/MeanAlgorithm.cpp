@@ -15,7 +15,11 @@ MeanAlgorithm::MeanAlgorithm(unsigned int convolutionSize) : Algorithm("Mean_")
 MeanAlgorithm::~MeanAlgorithm()
 {
 }
-
+/* mean algorithm
+the meanfilter will walk though the page with a 3 *3 mask. 
+the center pixel in this mask will be replaced with the average value of the pixels in the mask.
+the method needs an Image object.
+*/
 void MeanAlgorithm::doAlgorithm(Image& img) {
 	unsigned char * rawData = img.getRawData();
 	int bpp = img.getBPP();
