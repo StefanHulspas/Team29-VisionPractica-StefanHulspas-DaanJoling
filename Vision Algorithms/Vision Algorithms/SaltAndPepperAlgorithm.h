@@ -10,6 +10,6 @@ private:
 public:
 	SaltAndPepperAlgorithm(int percentage = 10);
 	~SaltAndPepperAlgorithm();
-	virtual void doAlgorithm(unsigned char * rawData, int bpp, int height, int width, int pitch);
+	virtual void doAlgorithm(Image& i);
 };
 

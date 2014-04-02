@@ -13,6 +13,6 @@ private:
 public:
 	K_MeansClusterAlgorithm(unsigned int k = 3);
 	~K_MeansClusterAlgorithm();
-	void doAlgorithm(unsigned char * rawData, int bpp, int height, int width, int pitch);
+	void doAlgorithm(Image& i);
 };
 

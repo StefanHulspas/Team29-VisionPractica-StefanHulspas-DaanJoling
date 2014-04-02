@@ -8,6 +8,6 @@ private:
 public:
 	MeanAlgorithm(unsigned int convolutionSize = 3);
 	~MeanAlgorithm();
-	virtual void doAlgorithm(unsigned char * rawData, int bpp, int height, int width, int pitch);
+	virtual void doAlgorithm(Image& i);
 };
 

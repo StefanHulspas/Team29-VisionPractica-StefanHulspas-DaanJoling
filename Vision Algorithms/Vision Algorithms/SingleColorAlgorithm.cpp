@@ -6,15 +6,15 @@ SingleColorAlgorithm::SingleColorAlgorithm(unsigned int color) : Algorithm("")
 {
 	if (color > 3) color = 3;
 	switch (color) {
-	case 0: 
+	case 1: 
 		name = "Blue_";
 		blue = 1;
 		break;
-	case 1:
+	case 2:
 		name = "Green_";
 		green = 1;
 		break;
-	case 2:
+	case 3:
 		name = "Red_";
 		red = 1;
 		break;
@@ -26,7 +26,12 @@ SingleColorAlgorithm::~SingleColorAlgorithm()
 {
 }
 
-void SingleColorAlgorithm::doAlgorithm(unsigned char * rawData, int bpp, int height, int width, int pitch) {
+void SingleColorAlgorithm::doAlgorithm(Image& img) {
+	unsigned char * rawData = img.getRawData();
+	int bpp = img.getBPP();
+	int height = img.getHeight();
+	int width = img.getWidth();
+	int pitch = img.getPitch();
 	unsigned int x, y;
 	for (y = 0; y < height; y++) {
 		for (x = 0; x < pitch; x += bpp) {

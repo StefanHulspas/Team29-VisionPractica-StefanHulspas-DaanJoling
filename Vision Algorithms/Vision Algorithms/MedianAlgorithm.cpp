@@ -16,7 +16,12 @@ MedianAlgorithm::~MedianAlgorithm()
 {
 }
 
-void MedianAlgorithm::doAlgorithm(unsigned char * rawData, int bpp, int height, int width, int pitch) {
+void MedianAlgorithm::doAlgorithm(Image& img) {
+	unsigned char * rawData = img.getRawData();
+	int bpp = img.getBPP();
+	int height = img.getHeight();
+	int width = img.getWidth();
+	int pitch = img.getPitch();
 	if (convolutionSize > width || convolutionSize > height) {
 		std::cout << "Not a valid format for this Algorithm.\nFilter is bigger then the image.\nNothing is done.\n";
 		return;
@@ -28,7 +33,7 @@ void MedianAlgorithm::doAlgorithm(unsigned char * rawData, int bpp, int height, 
 
 	unsigned int x, y, y2, x2;
 
-	unsigned char * originalData = new unsigned char[width * bpp * height];
+	unsigned char * originalData = new unsigned char[pitch * height];
 	for (y = 0; y < height; y++) {
 		for (x = 0; x < pitch; x += bpp) {
 			int pixelPlace = y * pitch + x;

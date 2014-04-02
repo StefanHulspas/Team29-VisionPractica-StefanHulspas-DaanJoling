@@ -26,12 +26,20 @@ K_MeansClusterAlgorithm::~K_MeansClusterAlgorithm()
 {
 }
 
-void K_MeansClusterAlgorithm::doAlgorithm(unsigned char * rawData, int bpp, int height, int width, int pitch) {
+void K_MeansClusterAlgorithm::doAlgorithm(Image& img) {
 	srand(time(NULL));
+	//setup
+	unsigned char * rawData = img.getRawData();
+	int bpp = img.getBPP();
+	int height = img.getHeight();
+	int width = img.getWidth();
+	int pitch = img.getPitch();
 	int * redClusters = new int[k];
 	int * greenClusters = new int[k];
 	int * blueClusters = new int[k];
 	unsigned int i;
+	//picking k random pixels
+	//pixels can be picked twice but with the iterations this is no problem
 	for (i = 0; i < k; i++) {
 		int x, y;
 		x = (int)((double)rand() / (double)RAND_MAX * (double)width);
@@ -41,12 +49,14 @@ void K_MeansClusterAlgorithm::doAlgorithm(unsigned char * rawData, int bpp, int 
 		greenClusters[i] = rawData[pixel + GREEN];
 		blueClusters[i] = rawData[pixel + BLUE];
 	}
+	//initializing data for each cluster
 	int * redClusterTotal = new int [k];
 	int * greenClusterTotal = new int [k];
 	int * blueClusterTotal = new int [k];
 	int * clusterCount = new int[k];
 	unsigned int x, y, closest, cluster, distClosest, distCluster;
 	for (i = 0; i < 25; i++) {
+		//reset clusters
 		std::cout << "Iteration " << i + 1 << "\n";
 		for (cluster = 0; cluster < k; cluster++) {
 			redClusterTotal[cluster] = 0;
@@ -54,6 +64,7 @@ void K_MeansClusterAlgorithm::doAlgorithm(unsigned char * rawData, int bpp, int 
 			blueClusterTotal[cluster] = 0;
 			clusterCount[cluster] = 0;
 		}
+		//walk through each pixel and determine the closest cluster
 		for (y = 0; y < height; y++) {
 			for (x = 0; x < pitch; x += bpp) {
 				int pixel = y * pitch + x;
@@ -76,6 +87,7 @@ void K_MeansClusterAlgorithm::doAlgorithm(unsigned char * rawData, int bpp, int 
 				clusterCount[closest]++;
 			}
 		}
+		//Update the clusters and check if they have changed
 		int unchangedClusters = 0;
 		for (cluster = 0; cluster < k; cluster++) {
 			if (clusterCount[cluster] != 0) {
@@ -96,6 +108,7 @@ void K_MeansClusterAlgorithm::doAlgorithm(unsigned char * rawData, int bpp, int 
 		}
 		if (unchangedClusters == k) break;
 	}
+	//change the picture according to the clusters
 	std::cout << "Starting picture change\n";
 	for (y = 0; y < height; y++) {
 		for (x = 0; x < pitch; x += bpp) {

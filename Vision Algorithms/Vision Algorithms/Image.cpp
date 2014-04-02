@@ -39,7 +39,6 @@ Image::Image(const char * name) {
 	created = true;
 }
 
-
 Image::Image(const Image& i) {
 	if (!i.created){
 		std::cout << "Can't copy this image!\n";
@@ -56,6 +55,29 @@ Image::Image(const Image& i) {
 	height = FreeImage_GetHeight(dib);
 	pitch = FreeImage_GetPitch(dib);
 	bpp = FreeImage_GetBPP(dib) / 8;
+
+	rawData = (unsigned char*)FreeImage_GetBits(dib);
+	created = true;
+}
+
+Image::Image(int height, int width, int bpp, char * name) {
+	std::string source(name);
+	saveNametoLowerCase(name);
+	saveFirstName();
+	findType(this->name);
+	if (compareType(".png")) {
+		format = FIF_PNG;
+	}
+	else if (compareType(".jpg")) {
+		format = FIF_JPEG;
+	}
+
+	dib = FreeImage_Allocate(width, height, bpp * 8, 0xFF000000, 0x00FF0000, 0x0000FF00);
+
+	this->width = FreeImage_GetWidth(dib);
+	this->height = FreeImage_GetHeight(dib);
+	this->pitch = FreeImage_GetPitch(dib);
+	this->bpp = FreeImage_GetBPP(dib) / 8;
 
 	rawData = (unsigned char*)FreeImage_GetBits(dib);
 	created = true;
@@ -111,39 +133,39 @@ int Image::compareType(char * type) {
 	return 1;
 }
 
-int Image::getWidth() {
+int Image::getWidth() const {
 	return width;
 }
 
-int Image::getHeight() {
+int Image::getHeight() const {
 	return height;
 }
 
-int Image::getPitch() {
+int Image::getPitch() const {
 	return pitch;
 }
 
-int Image::getBPP() {
+int Image::getBPP() const{
 	return bpp;
 }
 
-unsigned char * Image::getRawData() {
+unsigned char * Image::getRawData() const {
 	return rawData;
 }
 
-char * Image::getType() {
+char * Image::getType() const{
 	return type;
 }
 
-char * Image::getName() {
+char * Image::getName() const{
 	return name;
 }
 
-char * Image::getFirstName() {
+char * Image::getFirstName() const{
 	return firstName;
 }
 
-inline bool Image::exists(const char *filename) {
+inline bool Image::exists(const char *filename) const{
 	std::ifstream ifile(filename);
 	if (ifile.is_open()){
 		ifile.close();
@@ -168,7 +190,7 @@ void Image::print() {
 }
 
 void Image::applyAlgorithm(Algorithm* a, bool save) {
-	a->doAlgorithm(rawData, bpp, height, width, pitch);
+	a->doAlgorithm(*this);
 	if (save) {
 		std::string name = this->name;
 		name = a->getName() + name;

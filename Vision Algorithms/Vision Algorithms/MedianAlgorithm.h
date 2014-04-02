@@ -11,6 +11,6 @@ private:
 public:
 	MedianAlgorithm(unsigned int convolutionSize = 3);
 	~MedianAlgorithm();
-	virtual void doAlgorithm(unsigned char * rawData, int bpp, int height, int width, int pitch);
+	virtual void doAlgorithm(Image& i);
 };
 

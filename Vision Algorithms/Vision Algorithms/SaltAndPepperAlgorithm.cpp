@@ -13,8 +13,13 @@ SaltAndPepperAlgorithm::~SaltAndPepperAlgorithm()
 }
 
 
-void SaltAndPepperAlgorithm::doAlgorithm(unsigned char * rawData, int bpp, int height, int width, int pitch) {
+void SaltAndPepperAlgorithm::doAlgorithm(Image& img) {
 	srand(time(NULL));
+	unsigned char * rawData = img.getRawData();
+	int bpp = img.getBPP();
+	int height = img.getHeight();
+	int width = img.getWidth();
+	int pitch = img.getPitch();
 	double random = 0;
 	unsigned int x, y;
 	for (y = 0; y < height; y++) {

@@ -8,5 +8,5 @@ private:
 public:
 	GrayAlgorithm();
 	~GrayAlgorithm();
-	virtual void doAlgorithm(unsigned char * rawData, int bpp, int height, int width, int pitch);
+	virtual void doAlgorithm(Image& i);
 };

@@ -12,7 +12,12 @@ ThresholdAlgorithm::~ThresholdAlgorithm()
 }
 
 
-void ThresholdAlgorithm::doAlgorithm(unsigned char * rawData, int bpp, int height, int width, int pitch) {
+void ThresholdAlgorithm::doAlgorithm(Image& img) {
+	unsigned char * rawData = img.getRawData();
+	int bpp = img.getBPP();
+	int height = img.getHeight();
+	int width = img.getWidth();
+	int pitch = img.getPitch();
 	int lower = 0, higher = 0, tOld = 0, tNew = 0, higherCount = width * height, lowerCount = 4;
 	unsigned int x, y;
 	for (y = 0; y < height; y++) {
