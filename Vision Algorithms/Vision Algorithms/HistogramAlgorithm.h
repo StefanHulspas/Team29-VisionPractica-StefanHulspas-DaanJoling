@@ -11,6 +11,8 @@ private:
 public:
 	//constructor, needs a char * name and a size for the historgram
 	HistogramAlgorithm(char * name, int size);
+	//destructor.
 	~HistogramAlgorithm();
+	//the algorithm
 	virtual void doAlgorithm(Image& i);
 };

@@ -93,6 +93,7 @@ void TransformAlgorithm::firstOrder(Image& img) {
 			determineDistanceValue(distance, oldX, oldY);
 			oldX = floor(oldX) * bpp;
 			oldY = floor(oldY);
+			//check if the new value is in the picture, otherwise make it black.
 			if (oldX >= 0 && oldX < width * bpp && oldY >= 0 && oldY < height) {
 				pixel = (int)oldY * pitch + (int)oldX;
 				outputBlue = ((1 - distance[0]) * rawData[pixel + BLUE] + distance[0] * rawData[pixel + bpp + BLUE]) * (1 - distance[1]);
@@ -162,6 +163,7 @@ void TransformAlgorithm::firstOrderResize(Image& img) {
 			determineDistanceValue(distance, oldX, oldY);
 			oldX = floor(oldX) * bpp;
 			oldY = floor(oldY);
+			//check if the new value is in the picture, otherwise make it black.
 			if (oldX >= 0 && oldX < width * bpp && oldY >= 0 && oldY < height) {
 				pixel = (int)oldY * pitch + (int)oldX;
 				outputBlue = ((1 - distance[0]) * rawData[pixel + BLUE] + distance[0] * rawData[pixel + bpp + BLUE]) * (1 - distance[1]);
